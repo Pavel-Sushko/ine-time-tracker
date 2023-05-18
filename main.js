@@ -1,3 +1,15 @@
+// ==UserScript==
+// @name         INE Better Time Calculator
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Provides a more accurate calculation of the progress made in INE learning paths.
+// @author       Pavel Sushko
+// @license      MIT
+// @match        https://my.ine.com/
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=ine.com
+// @grant        none
+// ==/UserScript==
+
 (function () {
 	let checkExist = setInterval(function () {
 		if (document.querySelector('.lphero__name')) {
