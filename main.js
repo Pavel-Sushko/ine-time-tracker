@@ -13,8 +13,6 @@
 (function () {
 	let checkExist = setInterval(function () {
 		if (document.querySelector('.lphero__name')) {
-			console.log('.lphero__name element is loaded!');
-
 			const parseTime = (time) => {
 				let parts = time.split(' ');
 				let hours = parseInt(parts[0].replace('h', ''));
