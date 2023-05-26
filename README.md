@@ -1,5 +1,7 @@
 # INE Learning Path Progress Tracker
 
+## **\[BROKEN] This script is currently broken due to changes in the INE website. I am working on a fix.**
+
 The INE Learning Path Progress Tracker is a script that provides better insight into your progress on the INE Learning Path. It shows the percentage completed, the total time completed, the percentage left, and the estimated time left.
 
 ## Features
