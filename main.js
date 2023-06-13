@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         INE Better Time Calculator
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      2.0.2
 // @description  Provides a more accurate calculation of the progress made in INE learning paths.
 // @author       Pavel Sushko
 // @license      MIT
@@ -11,12 +11,15 @@
 // ==/UserScript==
 
 (async function () {
+	let falseProgressSelector = '.lpsection__group-progress';
+	let falseProgress = document.querySelector(falseProgressSelector);
 	let heroAnchorSelector = '.lphero__cta-wrapper a';
 	let heroAnchor = document.querySelector(heroAnchorSelector);
 
-	while (!heroAnchor) {
+	while (!falseProgress || !heroAnchor) {
 		await new Promise((r) => setTimeout(r, 100));
 
+		falseProgress = document.querySelector(falseProgressSelector);
 		heroAnchor = document.querySelector(heroAnchorSelector);
 	}
 
@@ -42,7 +45,5 @@
 
 	let resultJson = await result.json();
 
-	document.querySelector('.lpsection__group-progress').innerText = ` ${
-		resultJson.user_status.progress * 100
-	}% Complete`;
+	document.querySelector(falseProgressSelector).innerText = ` ${resultJson.user_status.progress * 100}% Complete`;
 })();
