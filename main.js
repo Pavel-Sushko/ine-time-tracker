@@ -44,11 +44,16 @@
 	});
 
 	let resultJson = await result.json();
-	let progress = resultJson.user_status.progress;
 	let durationInSeconds = resultJson.duration_in_seconds;
+	let progress = resultJson.user_status.progress;
+	let progressInSeconds = progress * durationInSeconds;
+	let timeLeftInSeconds = durationInSeconds - progressInSeconds;
 
 	document.querySelector(falseProgressSelector).innerText = ` ${progress * 100}% Complete (${(
-		(progress * durationInSeconds) /
-		3600
-	).toFixed(0)}h ${(((progress * durationInSeconds) % 3600) / 60).toFixed(0)}m)`;
+		progressInSeconds / 3600
+	).toFixed()}h ${((progressInSeconds % 3600) / 60).toFixed()}m)
+        ${100 - progress * 100}% Remaining (${(timeLeftInSeconds / 3600).toFixed()}h ${(
+		(timeLeftInSeconds % 3600) /
+		60
+	).toFixed()}m)`;
 })();
