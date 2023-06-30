@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         INE Better Time Calculator
 // @namespace    http://tampermonkey.net/
-// @version      2.0.3
+// @version      2.1.0
 // @description  Provides a more accurate calculation of the progress made in INE learning paths.
 // @author       Pavel Sushko
 // @license      MIT
@@ -49,11 +49,20 @@
 	let progressInSeconds = progress * durationInSeconds;
 	let timeLeftInSeconds = durationInSeconds - progressInSeconds;
 
+	if (document.cookie.indexOf('progress_at_start') === -1)
+		document.cookie = `progress_at_start=${progressInSeconds}; path=/; domain=.ine.com; secure; samesite=none;`;
+
+	let progressAtStart = parseCookie(document.cookie).progress_at_start;
+
 	document.querySelector(falseProgressSelector).innerText = ` ${progress * 100}% Complete (${(
 		progressInSeconds / 3600
 	).toFixed()}h ${((progressInSeconds % 3600) / 60).toFixed()}m)
         ${100 - progress * 100}% Remaining (${(timeLeftInSeconds / 3600).toFixed()}h ${(
 		(timeLeftInSeconds % 3600) /
 		60
-	).toFixed()}m)`;
+	).toFixed()}m)\n
+    Current session: ${((progressAtStart - progressInSeconds) / 3600).toFixed()}h ${(
+		((progressAtStart - progressInSeconds) % 3600) /
+		60
+	).toFixed()}m`;
 })();
