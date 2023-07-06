@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         INE Better Time Calculator
 // @namespace    http://tampermonkey.net/
-// @version      2.1.0
+// @version      2.1.1
 // @description  Provides a more accurate calculation of the progress made in INE learning paths.
 // @author       Pavel Sushko
 // @license      MIT
@@ -83,8 +83,8 @@
 
 	// Session time object
 	let session = {
-		hours: Math.floor((progressAtStart - progressInSeconds) / 3600), // Calculate the session hours
-		minutes: Math.floor(((progressAtStart - progressInSeconds) % 3600) / 60), // Calculate the session minutes
+		hours: Math.floor((progressInSeconds - progressAtStart) / 3600), // Calculate the session hours
+		minutes: Math.floor(((progressInSeconds - progressAtStart) % 3600) / 60), // Calculate the session minutes
 	};
 
 	// Array of time strings
